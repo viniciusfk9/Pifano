@@ -1,9 +1,11 @@
 from flask import Flask
 from flask_migrate import Migrate
 
+from pifano.blueprints.restapi.login_service import bp_login
 from pifano.blueprints.restapi.user_service import bp_user
 
 from pifano.external.models import configure as configure_db
+from pifano.external.login import configure as configure_login
 
 
 def create_app(*args, **kwargs):
@@ -19,7 +21,11 @@ def create_app(*args, **kwargs):
     # Configure Flask Migrate
     Migrate(app, app.db)
 
+    # Configure Login Extension
+    configure_login(app)
+
     # Blueprints
+    app.register_blueprint(bp_login)
     app.register_blueprint(bp_user)
 
     return app

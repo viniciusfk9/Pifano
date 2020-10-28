@@ -26,7 +26,7 @@ def add_user():
                 }
 
         else:
-            data = {"error": "The request payload is not in JSON format"}
+            data = {"error": "JSON format"}
     else:
         data = {"error": "POST request"}
 
